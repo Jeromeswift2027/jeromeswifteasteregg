@@ -6,6 +6,38 @@
      Rappel : personne ne doit tomber dessus, ça ruinerait tout le projet. -->
 <!DOCTYPE html>
 <!--
+========================================================================
+INDEX DES ÉLÉMENTS À FOURNIR PAR PAUL (TODO-PAUL)
+========================================================================
+Ce site est un outil pédagogique satirique (parodie de campagne présidentielle
+inspirée de "A Modest Proposal" de Jonathan Swift, 1729). Il est destiné à des
+élèves de 3ème pour un cours sur la satire et l'esprit critique.
+
+Chercher "TODO-PAUL" dans le code pour trouver tous les emplacements incomplets.
+
+IMAGES À FOURNIR (11 fichiers, dossier images/) :
+  [IMAGE img-meat-01.jpg]      — Côtes d'agneau crues sur plateau inox (Programme, Mesure 2)
+  [IMAGE img-meat-02.jpg]       — Rôti ficelé cru veau/agneau (Programme, Mesure 2)
+  [IMAGE img-meat-03.jpg]      — Abats variés foie/cœur/ris sur plateau (Programme, Mesure 3)
+  [IMAGE img-meat-04.jpg] — Pièce de viande crue rosée sur planche bois (Article Recette)
+  [IMAGE img-meat-05.jpg]  — Barquette sous film plastique type supermarché (Article Traçabilité)
+  [IMAGE img-meat-06.jpg]    — Rognons d'agneau crus (Article Traçabilité)
+  [IMAGE img-meat-07.jpg]       — Étal de boucherie, pièces variées (Page Prévente)
+  [IMAGE img-meat-08.jpg]    — Cochon de lait rôti entier (Page Liens, Option A)
+  [IMAGE img-meat-09.jpg]    — Idem autre angle ou gigot entier (Page Liens, Option A)
+  [IMAGE img-doc-01.jpg]          — Performance Zhu Yu "Eating People" 2000 (Page Liens, Option B, derrière double barrière 18+/flou)
+  [IMAGE img-doc-02.jpg]          — Idem seconde image (Page Liens, Option B)
+
+TEXTES À RÉDIGER (5 faux témoignages de personnalités malthusiennes) :
+  [TEXTE témoignage-cochet]    — Faux soutien d'Yves Cochet (vivant, crédible)
+  [TEXTE témoignage-ehrlich]   — Faux soutien de Paul Ehrlich (américain, piège: parle français)
+  [TEXTE témoignage-cousteau]  — Faux soutien du Cdt Cousteau (PIÈGE: mort en 1997)
+  [TEXTE témoignage-dumont]    — Faux soutien de René Dumont (PIÈGE: mort en 2001)
+  [TEXTE témoignage-servigne]  — Faux soutien de Pablo Servigne (vivant, le plus crédible)
+
+Chaque TODO contient des instructions détaillées sur le ton, le registre,
+les positions réelles du personnage et le piège pédagogique intégré.
+========================================================================
 -->
 <html lang="fr">
 <head>
@@ -1298,9 +1330,122 @@ body.shaking {
   .bio-img { float: none; margin: 0 auto 15px auto; display: block; }
   .nav a { padding: 10px 12px; font-size: 0.78em; }
 }
+/* ========== LOGIN OVERLAY ========== */
+#login-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: #f0ebe4; z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+#login-overlay.hidden { display: none; }
+#login-box {
+  background: #fff; border: 1px solid #ddd; padding: 40px 36px;
+  max-width: 420px; width: 90%; text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+#login-box h2 { color: #b5451b; font-size: 1.3em; margin-bottom: 8px; }
+#login-box p { color: #666; font-size: 0.88em; margin-bottom: 20px; }
+#login-box input, #login-box select {
+  display: block; width: 100%; padding: 10px 14px; margin-bottom: 12px;
+  border: 1px solid #d0c8c0; font-family: Georgia, serif; font-size: 0.95em;
+  background: #faf8f5; border-radius: 3px;
+}
+#login-box button {
+  background: #b5451b; color: #fff; border: none; padding: 12px 32px;
+  font-family: Georgia, serif; font-size: 1em; cursor: pointer;
+  margin-top: 8px; border-radius: 3px;
+}
+#login-box button:hover { background: #933715; }
+#login-box .login-error { color: #c00; font-size: 0.82em; margin-top: 8px; display: none; }
+
+/* ========== HOMEWORK FORM ========== */
+#homework-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7); z-index: 99998;
+  display: none; align-items: center; justify-content: center;
+}
+#homework-overlay.show { display: flex; }
+#homework-box {
+  background: #fff; border: 1px solid #ddd; padding: 32px 28px;
+  max-width: 520px; width: 92%; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+#homework-box h3 { color: #b5451b; font-size: 1.1em; margin-bottom: 6px; }
+#homework-box p { font-size: 0.85em; color: #666; margin-bottom: 16px; }
+#homework-box label {
+  display: block; font-size: 0.88em; font-weight: bold;
+  color: #444; margin-bottom: 4px; margin-top: 12px;
+}
+#homework-box textarea {
+  display: block; width: 100%; padding: 8px 12px; min-height: 60px;
+  border: 1px solid #d0c8c0; font-family: Georgia, serif; font-size: 0.9em;
+  background: #faf8f5; border-radius: 3px; resize: vertical;
+}
+#homework-box button {
+  background: #b5451b; color: #fff; border: none; padding: 10px 28px;
+  font-family: Georgia, serif; font-size: 0.95em; cursor: pointer;
+  margin-top: 16px; border-radius: 3px;
+}
+#homework-box button:hover { background: #933715; }
+#homework-box .hw-success {
+  color: #2a7a2a; font-size: 0.9em; font-weight: bold;
+  margin-top: 12px; display: none;
+}
+#homework-box .hw-error {
+  color: #c00; font-size: 0.82em; margin-top: 8px; display: none;
+}
+/* Bouton flottant pour ouvrir le formulaire */
+#homework-btn {
+  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+  background: #b5451b; color: #fff; border: none;
+  padding: 12px 20px; font-family: Georgia, serif; font-size: 0.9em;
+  cursor: pointer; border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  display: none;
+}
+#homework-btn:hover { background: #933715; }
 </style>
 </head>
 <body>
+
+<!-- OVERLAY DE CONNEXION — bloque le site -->
+<div id="login-overlay">
+  <div id="login-box">
+    <h2>Bienvenue</h2>
+    <p>Identifie-toi pour accéder au site.</p>
+    <input type="text" id="login-nom" placeholder="Ton nom de famille">
+    <input type="text" id="login-prenom" placeholder="Ton prénom">
+    <select id="login-classe">
+      <option value="">— Choisis ta classe —</option>
+      <option value="3ème">3ème</option>
+    </select>
+    <button onclick="doLogin()">Entrer</button>
+    <div class="login-error" id="login-error">Remplis tous les champs.</div>
+  </div>
+</div>
+
+<!-- FORMULAIRE TRAVAIL MAISON — modal flottant -->
+<div id="homework-overlay">
+  <div id="homework-box">
+    <h3>Dépose ton travail maison</h3>
+    <p>Thème à dénoncer + 3 arguments. Écris directement dans les cases.</p>
+    <label>Ton thème (le problème de société que tu veux dénoncer) :</label>
+    <textarea id="hw-theme" rows="2" placeholder="Ex : le harcèlement scolaire"></textarea>
+    <label>Argument 1 :</label>
+    <textarea id="hw-arg1" rows="2" placeholder="Ton premier argument (non développé)"></textarea>
+    <label>Argument 2 :</label>
+    <textarea id="hw-arg2" rows="2" placeholder="Ton deuxième argument"></textarea>
+    <label>Argument 3 :</label>
+    <textarea id="hw-arg3" rows="2" placeholder="Ton troisième argument"></textarea>
+    <button onclick="submitHomework()">Envoyer</button>
+    <button onclick="closeHomework()" style="background:#666; margin-left:8px;">Fermer</button>
+    <div class="hw-success" id="hw-success">Travail envoyé avec succès !</div>
+    <div class="hw-error" id="hw-error">Remplis tous les champs.</div>
+  </div>
+</div>
+
+<!-- BOUTON FLOTTANT POUR OUVRIR LE FORMULAIRE -->
+<button id="homework-btn" onclick="openHomework()">📝 Déposer mon travail</button>
 
 <!-- FIXME Kevin : vérifier le footer avant déploiement, il reste des traces du template. -->
 
@@ -2376,6 +2521,9 @@ function goTo(page) {
   if (navLink) navLink.classList.add('active');
 
   window.scrollTo(0, 0);
+
+  // Tracking silencieux
+  trackEvent('PAGE', page);
 }
 
 // --- FILTRE ANTI-INJURES (VERSION RENFORCÉE) ---
@@ -2551,6 +2699,7 @@ function contientInjure(texte) {
 
 
 function postComment(section) {
+  trackEvent('COMMENT', section);
   var nameInput = document.getElementById('name-' + section);
   var textInput = document.getElementById('text-' + section);
   var name = nameInput.value.trim() || 'Anonyme';
@@ -2670,6 +2819,7 @@ document.getElementById('main-title').addEventListener('click', function(e) {
 var nonClicks = 0;
 var nonTimer = null;
 function clickNon() {
+  trackEvent('SURVEY', 'Non');
   if (revealTriggered) return;
   nonClicks++;
   clearTimeout(nonTimer);
@@ -2773,6 +2923,7 @@ function typeWriter(elementId, text, speed, callback) {
 
 // --- Main trigger ---
 function triggerReveal() {
+  trackEvent('EASTER_EGG', 'triggered');
   if (revealTriggered) return;
   revealTriggered = true;
 
@@ -3920,6 +4071,177 @@ function revealFlash(bcId) {
     }, 2000);
   }, 3000);
 }
+// =====================================================
+// TRACKING — Système de suivi silencieux
+// =====================================================
+
+// *** COLLE ICI L'URL DE TON APPS SCRIPT ***
+var TRACKING_URL = 'COLLER_URL_APPS_SCRIPT_ICI';
+
+// Données de session
+var studentData = { nom: '', prenom: '', classe: '' };
+
+function trackEvent(eventType, detail) {
+  if (!studentData.nom || TRACKING_URL === 'COLLER_URL_APPS_SCRIPT_ICI') return;
+  try {
+    navigator.sendBeacon(TRACKING_URL, JSON.stringify({
+      type: 'log',
+      nom: studentData.nom,
+      prenom: studentData.prenom,
+      classe: studentData.classe,
+      event: eventType,
+      detail: detail || ''
+    }));
+  } catch(e) {}
+}
+
+// --- LOGIN ---
+function doLogin() {
+  var nom = document.getElementById('login-nom').value.trim();
+  var prenom = document.getElementById('login-prenom').value.trim();
+  var classe = document.getElementById('login-classe').value;
+  var errEl = document.getElementById('login-error');
+
+  if (!nom || !prenom || !classe) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  studentData.nom = nom;
+  studentData.prenom = prenom;
+  studentData.classe = classe;
+
+  // Sauvegarder en session
+  sessionStorage.setItem('swift-student', JSON.stringify(studentData));
+
+  // Masquer l'overlay
+  document.getElementById('login-overlay').classList.add('hidden');
+
+  // Afficher le bouton de dépôt de travail
+  document.getElementById('homework-btn').style.display = 'block';
+
+  // Log connexion
+  trackEvent('CONNEXION', 'Accès au site');
+
+  // Log page initiale
+  trackEvent('PAGE', 'accueil');
+}
+
+// Restaurer la session si elle existe
+(function() {
+  var saved = sessionStorage.getItem('swift-student');
+  if (saved) {
+    try {
+      studentData = JSON.parse(saved);
+      if (studentData.nom) {
+        document.getElementById('login-overlay').classList.add('hidden');
+        document.getElementById('homework-btn').style.display = 'block';
+      }
+    } catch(e) {}
+  }
+})();
+
+// --- HOMEWORK FORM ---
+var hwOpenTime = 0;
+var hwPasteCount = 0;
+var hwCharsTyped = 0;
+var hwCharsPasted = 0;
+
+function openHomework() {
+  document.getElementById('homework-overlay').classList.add('show');
+  hwOpenTime = Date.now();
+  hwPasteCount = 0;
+  hwCharsTyped = 0;
+  hwCharsPasted = 0;
+  document.getElementById('hw-success').style.display = 'none';
+  document.getElementById('hw-error').style.display = 'none';
+  trackEvent('HOMEWORK', 'formulaire ouvert');
+}
+
+function closeHomework() {
+  document.getElementById('homework-overlay').classList.remove('show');
+}
+
+function submitHomework() {
+  var theme = document.getElementById('hw-theme').value.trim();
+  var arg1 = document.getElementById('hw-arg1').value.trim();
+  var arg2 = document.getElementById('hw-arg2').value.trim();
+  var arg3 = document.getElementById('hw-arg3').value.trim();
+  var errEl = document.getElementById('hw-error');
+  var okEl = document.getElementById('hw-success');
+
+  if (!theme || !arg1 || !arg2 || !arg3) {
+    errEl.style.display = 'block';
+    okEl.style.display = 'none';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  var timeSpent = Math.round((Date.now() - hwOpenTime) / 1000);
+
+  // Envoyer au Google Sheet
+  if (TRACKING_URL !== 'COLLER_URL_APPS_SCRIPT_ICI') {
+    try {
+      navigator.sendBeacon(TRACKING_URL, JSON.stringify({
+        type: 'homework',
+        nom: studentData.nom,
+        prenom: studentData.prenom,
+        classe: studentData.classe,
+        theme: theme,
+        arg1: arg1,
+        arg2: arg2,
+        arg3: arg3,
+        timeSpent: timeSpent,
+        pasteCount: hwPasteCount,
+        charsTyped: hwCharsTyped,
+        charsPasted: hwCharsPasted
+      }));
+    } catch(e) {}
+  }
+
+  okEl.style.display = 'block';
+  trackEvent('HOMEWORK', 'envoyé — ' + timeSpent + 's — collages:' + hwPasteCount);
+
+  // Désactiver le formulaire
+  document.querySelectorAll('#homework-box textarea').forEach(function(t) { t.disabled = true; });
+  document.querySelector('#homework-box button').disabled = true;
+}
+
+// Détection paste vs frappe sur les textareas du homework
+document.querySelectorAll('#homework-box textarea').forEach(function(ta) {
+  ta.addEventListener('input', function(e) {
+    if (e.inputType && e.inputType !== 'insertFromPaste') {
+      hwCharsTyped += (e.data ? e.data.length : 1);
+    }
+  });
+  ta.addEventListener('paste', function(e) {
+    hwPasteCount++;
+    var pasted = (e.clipboardData || window.clipboardData);
+    if (pasted) {
+      var text = pasted.getData('text');
+      hwCharsPasted += text.length;
+    }
+    trackEvent('HOMEWORK_PASTE', 'collage #' + hwPasteCount);
+  });
+});
+
+// --- VIDEO TRACKING ---
+document.querySelectorAll('video').forEach(function(v, i) {
+  v.addEventListener('play', function() {
+    trackEvent('VIDEO', 'play vid-0' + (i + 1));
+  });
+  v.addEventListener('ended', function() {
+    trackEvent('VIDEO', 'fin vid-0' + (i + 1));
+  });
+});
+
+// --- TEMPS SUR LE SITE ---
+var siteOpenTime = Date.now();
+window.addEventListener('beforeunload', function() {
+  var totalTime = Math.round((Date.now() - siteOpenTime) / 1000);
+  trackEvent('QUIT', totalTime + 's sur le site');
+});
+
 </script>
 
 <!-- ========== EASTER EGG : OVERLAYS ========== -->
