@@ -2699,11 +2699,11 @@ function contientInjure(texte) {
 
 
 function postComment(section) {
-  trackEvent('COMMENT', section);
   var nameInput = document.getElementById('name-' + section);
   var textInput = document.getElementById('text-' + section);
   var name = nameInput.value.trim() || 'Anonyme';
   var text = textInput.value.trim();
+  trackEvent('COMMENT', section + ' | ' + name + ' : ' + text);
   if (!text) return;
 
   // Vérification injures dans le nom ET le texte
