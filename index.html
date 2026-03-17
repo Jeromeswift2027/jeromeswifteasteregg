@@ -3173,6 +3173,7 @@ function triggerReveal() {
 
 // --- Hack sequence ---
 function startHackSequence(callback) {
+  trackEvent('SEQUENCE', 'BSOD terminé → Terminal de hack lancé');
   var hack = document.getElementById('hack-screen');
   hack.classList.add('active');
 
@@ -3255,6 +3256,7 @@ function startHackSequence(callback) {
 
 // --- Matrix + Reveal sequence ---
 function startMatrixSequence(canvas, scanlines, revealScreen, body) {
+  trackEvent('SEQUENCE', 'Hack terminé → MATRIX lancée');
   // Sortie du plein écran — retour à Chrome normal
   try {
     if (document.exitFullscreen) document.exitFullscreen();
@@ -3291,6 +3293,7 @@ function startMatrixSequence(canvas, scanlines, revealScreen, body) {
     matrixSpeed = 50;
     startMatrixRain(0.08);
     revealScreen.classList.add('visible');
+    trackEvent('SEQUENCE', 'Page pédagogique RÉVÉLÉE — l\'élève voit la vérité');
 
     setTimeout(function() {
       typeWriter('typed1', '> CE SITE EST UN FAUX.', 75, function() {
