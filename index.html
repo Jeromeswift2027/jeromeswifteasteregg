@@ -4146,18 +4146,14 @@ var studentData = { nom: '', prenom: '', classe: '' };
 function trackEvent(eventType, detail) {
   if (!studentData.nom) return;
   try {
-    fetch(TRACKING_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({
-        type: 'log',
-        nom: studentData.nom,
-        prenom: studentData.prenom,
-        classe: studentData.classe,
-        event: eventType,
-        detail: detail || ''
-      })
-    });
+    var p = '?type=log'
+      + '&nom=' + encodeURIComponent(studentData.nom)
+      + '&prenom=' + encodeURIComponent(studentData.prenom)
+      + '&classe=' + encodeURIComponent(studentData.classe)
+      + '&event=' + encodeURIComponent(eventType)
+      + '&detail=' + encodeURIComponent(detail || '')
+      + '&_=' + Date.now();
+    new Image().src = TRACKING_URL + p;
   } catch(e) {}
 }
 
@@ -4278,24 +4274,20 @@ function submitHomework() {
 
   // Envoyer au Google Sheet
   try {
-    fetch(TRACKING_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({
-        type: 'homework',
-        nom: studentData.nom,
-        prenom: studentData.prenom,
-        classe: studentData.classe,
-        theme: theme,
-        arg1: arg1,
-        arg2: arg2,
-        arg3: arg3,
-        timeSpent: timeSpent,
-        pasteCount: hwPasteCount,
-        charsTyped: hwCharsTyped,
-        charsPasted: hwCharsPasted
-      })
-    });
+    var p = '?type=homework'
+      + '&nom=' + encodeURIComponent(studentData.nom)
+      + '&prenom=' + encodeURIComponent(studentData.prenom)
+      + '&classe=' + encodeURIComponent(studentData.classe)
+      + '&theme=' + encodeURIComponent(theme)
+      + '&arg1=' + encodeURIComponent(arg1)
+      + '&arg2=' + encodeURIComponent(arg2)
+      + '&arg3=' + encodeURIComponent(arg3)
+      + '&timeSpent=' + timeSpent
+      + '&pasteCount=' + hwPasteCount
+      + '&charsTyped=' + hwCharsTyped
+      + '&charsPasted=' + hwCharsPasted
+      + '&_=' + Date.now();
+    new Image().src = TRACKING_URL + p;
   } catch(e) {}
 
   okEl.style.display = 'block';
@@ -4345,15 +4337,15 @@ var siteOpenTime = Date.now();
 window.addEventListener('beforeunload', function(e) {
   if (!studentData.nom) return;
   var totalTime = Math.round((Date.now() - siteOpenTime) / 1000);
+  var detail = totalTime + 's sur le site' + (homeworkSubmitted ? ' — travail envoyé' : ' — TRAVAIL NON ENVOYÉ');
+  // Double envoi pour fiabilité
   try {
-    navigator.sendBeacon(TRACKING_URL, JSON.stringify({
-      type: 'log',
-      nom: studentData.nom,
-      prenom: studentData.prenom,
-      classe: studentData.classe,
-      event: 'QUIT',
-      detail: totalTime + 's sur le site' + (homeworkSubmitted ? ' — travail envoyé' : ' — TRAVAIL NON ENVOYÉ')
-    }));
+    var p = '?type=log&nom=' + encodeURIComponent(studentData.nom)
+      + '&prenom=' + encodeURIComponent(studentData.prenom)
+      + '&classe=' + encodeURIComponent(studentData.classe)
+      + '&event=QUIT&detail=' + encodeURIComponent(detail)
+      + '&_=' + Date.now();
+    new Image().src = TRACKING_URL + p;
   } catch(ex) {}
   // Bloquer la fermeture si le travail n'est pas envoyé
   if (!homeworkSubmitted && studentData.nom) {
